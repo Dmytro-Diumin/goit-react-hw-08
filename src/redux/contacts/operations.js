@@ -36,15 +36,3 @@ export const deleteContact = createAsyncThunk(
     }
   }
 );
-
-export const searchContacts = createAsyncThunk(
-  "contacts/searchContacts",
-  async (query, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.get(`/contacts/search?q=${query}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
