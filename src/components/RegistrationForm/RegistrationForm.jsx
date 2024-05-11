@@ -5,28 +5,9 @@ import styles from "../ContactForm/ContactForm.module.css";
 
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
-import { fetchContacts } from "../../redux/contacts/operations";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
-
-  const handleSubmit = (values, actions) => {
-    dispatch(
-      register({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      })
-    ).then((response) => {
-      if (response.payload) {
-        console.log("Successfully registrated");
-        dispatch(fetchContacts());
-      } else {
-        console.error("Registration error");
-      }
-    });
-    actions.resetForm();
-  };
 
   const nameId = useId();
   const emailId = useId();
@@ -53,8 +34,10 @@ const RegistrationForm = () => {
   return (
     <Formik
       initialValues={{ name: "", email: "", password: "" }}
+      onSubmit={(values) => {
+        dispatch(register(values));
+      }}
       validationSchema={userSchema}
-      onSubmit={handleSubmit}
     >
       <Form>
         <div className={styles.wrap}>

@@ -9,22 +9,22 @@ import { login } from "../../redux/auth/operations";
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
-    dispatch(
-      login({
-        email: values.email,
-        password: values.password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        console.log("login success");
-      })
-      .catch(() => {
-        console.log("login error");
-      });
-    actions.resetForm();
-  };
+  // const handleSubmit = (values, actions) => {
+  //   dispatch(
+  //     login({
+  //       email: values.email,
+  //       password: values.password,
+  //     })
+  //   )
+  //     .unwrap()
+  //     .then(() => {
+  //       console.log("login success");
+  //     })
+  //     .catch(() => {
+  //       console.log("login error");
+  //     });
+  //   actions.resetForm();
+  // };
 
   const emailId = useId();
   const passwordId = useId();
@@ -45,8 +45,10 @@ const LoginForm = () => {
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
+      onSubmit={(values) => {
+        dispatch(login(values));
+      }}
       validationSchema={userSchema}
-      onSubmit={handleSubmit}
     >
       <Form>
         <div className={styles.wrap}>
