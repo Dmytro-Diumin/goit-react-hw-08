@@ -64,19 +64,14 @@ export const selectFilteredContacts = createSelector(
     if (contacts.length === 0) return [];
     let filteredContacts = contacts;
 
-    if (typeof nameFilter === "string") {
-      filteredContacts = filteredContacts.filter(({ name }) => {
+    if (typeof nameFilter === "string" || typeof numberFilter === "string") {
+      filteredContacts = filteredContacts.filter(({ name, number }) => {
         return (
-          name && name.toLowerCase().includes(nameFilter.toLowerCase().trim())
+          name && name.toLowerCase().includes(nameFilter.toLowerCase().trim()) || number && number.includes(numberFilter.trim())
         );
       });
     }
 
-    if (typeof numberFilter === "string") {
-      filteredContacts = filteredContacts.filter(({ number }) => {
-        return number && number.includes(numberFilter.trim());
-      });
-    }
 
     return filteredContacts;
   }
