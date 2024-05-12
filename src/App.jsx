@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { lazy, useEffect } from "react";
 
 import { selectIsRefreshing } from "./redux/auth/selectors";
-import { fetchContacts } from "./redux/contacts/operations";
 import Layout from "./components/Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";

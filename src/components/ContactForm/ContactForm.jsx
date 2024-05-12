@@ -5,12 +5,15 @@ import styles from "../ContactForm/ContactForm.module.css";
 
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
+import toast from "react-hot-toast";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(addContact(values));
+    dispatch(addContact(values)).then(() => {
+      toast.success("Contact added successfully");
+    });
     actions.resetForm();
   };
 
